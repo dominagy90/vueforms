@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>PAGE TITLE</h1>
+
+    <script type="module">
+        import  formcomp from './components/form.js';
+
+        const { createApp } = Vue
+
+        createApp({
+            components: { formcomp },
+            data() {
+                return {
+                    fm: 0,
+                    forms: []
+                }
+            },
+            template: `
+                <p>person count: {{fm}}</p>
+                <p>person list: {{JSON.stringify(forms)}}</p>
+                <button @click="event => addForm()">NEW PERSON</button>
+                <div class="forms">
+                    <formcomp v-for="index in fm" :id=index @submitted="saveForm"></formcomp>
+                </div>`,
+            methods: {
+                addForm() {
+                    this.fm++;
+                    this.forms.push({ name: '', age: null });
+
+                },
+                saveForm(data) {
+                    this.forms[data.id-1]={name:data.name,age:data.age}
+                }
+            }
+        }).mount('#app')
+    </script>
+    
+    <div id="app"></div>
+
+    <p>this is the last row...</p>
+</body>
+</html>
