@@ -6,6 +6,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3"></script>
     <title>Document</title>
@@ -15,15 +18,15 @@
             padding: 0;
             overflow: hidden;
             height: 100vh;
+            font-family: 'Open Sans', sans-serif;
         }
         h1 {
-            font-family: 'Fascinate', cursive;
+            font-family: 'Fascinate', cursive !important;
             margin: 0;
             padding: 2rem;
             background: black;
             color: white;
             text-align: center;
-            height: 5vh;
         }
 
         #app {
@@ -31,7 +34,9 @@
             padding: 2rem;
             -ms-overflow-style: none;
             scrollbar-width: none;
-            height: 90vh;
+            background-color: #a8a8a8;
+            overflow-y:scroll;
+            height:100%;
         }
 
         #app::-webkit-scrollbar {
@@ -39,23 +44,71 @@
         }
 
         #lr {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
             background-color: black;
             color: white;
             margin: 0;
             padding: 2rem;
             overflow: hidden;
-            height: 5vh;
         }
 
+        #newFrm {
+            background-color: white;
+            color: black;
+            border-radius: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            border: 2px solid black;
+            transition: all 0.2s linear;
+            padding: 0.2rem 2rem;
+        }
+
+        #newFrm:hover {
+            background-color:black;
+            color: white;
+            box-shadow: 0px 0px 15px #484848;
+        }
+
+        .forms {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .formdiv {
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+            border: 1px solid #a8a8a8;
+            border-radius: 1rem;
+            background-color: white;
+            padding: 0.5rem;
+        }
+
+        .submitFrm {
+            background-color: white;
+            color: black;
+            border-radius: 1.3rem;
+            font-weight: 600;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            border: 2px solid black;
+            transition: all 0.2s linear;
+            padding: 0.2rem 2rem;
+            margin: 0.8rem 0;
+        }
+
+        .submitFrm:hover {
+            background-color:black;
+            color: white;
+            box-shadow: 0px 0px 15px #484848;
+        }
     </style>
 </head>
 <body>
-    <h1>PAGE TITLE</h1>
-
     <script type="module">
         import  formcomp from './components/form.js';
 
@@ -72,20 +125,12 @@
             template: `
                 <p>person count: {{fm}}</p>
                 <p>person list: {{JSON.stringify(forms)}}</p>
-                <button @click="event => addForm()">NEW PERSON</button>
-                <div class="forms">
+                <p style="text-align:center;padding:1rem;margin:2rem 0;">
+                    <button id="newFrm" @click="event => addForm()">NEW PERSON FORM</button>
+                </p>
+                <div class="forms" v-if="fm>0">
                     <formcomp v-for="index in fm" :id=index @submitted="saveForm"></formcomp>
                 </div>`,
-            style: `
-                <style>
-                    button {
-                        color: red;
-                    }
-                    p {
-                        background-color: red;
-                    }
-                </style>
-            `,
             methods: {
                 addForm() {
                     this.fm++;
@@ -98,9 +143,12 @@
             }
         }).mount('#app')
     </script>
-    
-    <div id="app"></div>
-
-    <p id="lr">this is the last row...</p>
+    <div style="height:100% !important;overflow:hidden;display:flex;flex-direction:column;justify-content: space-between;">
+        <h1>PAGE TITLE</h1>
+        <p style="text-align:center;height: 5%;">##VUEJS module starts below this line##</p>
+        <div id="app"></div>
+        <p style="text-align:center;height: 5%;">##VUEJS module starts above this line##</p>
+        <p id="lr">this is the last row...</p>
+    </div>
 </body>
 </html>
