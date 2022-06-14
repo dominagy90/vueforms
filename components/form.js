@@ -17,6 +17,11 @@ export default {
         }
     },
     template: `
+    <style>
+        label {
+            color: red;
+        }
+    </style>
     <div class="formdiv">
       <label>name</label>
       <input :value="text" @input="event => form.name = event.target.value">

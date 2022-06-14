@@ -10,9 +10,47 @@
     <script src="https://unpkg.com/vue@3"></script>
     <title>Document</title>
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
         h1 {
             font-family: 'Fascinate', cursive;
+            margin: 0;
+            padding: 2rem;
+            background: black;
+            color: white;
+            text-align: center;
+            height: 5vh;
         }
+
+        #app {
+            margin: 0;
+            padding: 2rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            height: 90vh;
+        }
+
+        #app::-webkit-scrollbar {
+            display: none
+        }
+
+        #lr {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 2rem;
+            overflow: hidden;
+            height: 5vh;
+        }
+
     </style>
 </head>
 <body>
@@ -38,6 +76,16 @@
                 <div class="forms">
                     <formcomp v-for="index in fm" :id=index @submitted="saveForm"></formcomp>
                 </div>`,
+            style: `
+                <style>
+                    button {
+                        color: red;
+                    }
+                    p {
+                        background-color: red;
+                    }
+                </style>
+            `,
             methods: {
                 addForm() {
                     this.fm++;
@@ -53,6 +101,6 @@
     
     <div id="app"></div>
 
-    <p>this is the last row...</p>
+    <p id="lr">this is the last row...</p>
 </body>
 </html>
